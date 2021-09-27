@@ -251,7 +251,8 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
           {this.props.showCloseButton && (
             <Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.props.onClose} />
           )}
-          <ScrollView
+          {this.props.children}
+          {/* <ScrollView
             onTouchStart={() => {
               return false;
             }}
@@ -268,7 +269,7 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
             ) : (
               this.props.children
             )}
-          </ScrollView>
+          </ScrollView> */}
         </Animated.View>
       </Animated.View>
     ) : null;
