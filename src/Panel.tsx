@@ -188,13 +188,15 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
       useNativeDriver: true,
       restDisplacementThreshold: 10,
       restSpeedThreshold: 10,
-    }).start(() => {
-      if (newStatus === 0) {
-        this.props.onClose();
-        this.setState({
-          showComponent: false,
-        });
-      } else this.setState({ canScroll: newStatus === STATUS.LARGE ? true : false });
+    }).start(({finished}) => {
+      if(finished){
+        if (newStatus === 0) {
+          this.props.onClose();
+          this.setState({
+            showComponent: false,
+          });
+        } else this.setState({ canScroll: newStatus === STATUS.LARGE ? true : false });
+      }
     });
   };
 
