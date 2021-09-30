@@ -219,10 +219,19 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
         style={[
           SwipeablePanelStyles.background,
           {
-            backgroundColor: noBackgroundOpacity ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)',
-            height: allowTouchOutside ? 'auto' : (actualHeight ? actualHeight : deviceHeight),
+            backgroundColor: noBackgroundOpacity ? 'rgba(0,0,0,0.0)' : 'rgba(0,0,0,0.5)',
+            height: allowTouchOutside ? 'auto' : (actualHeight ? actualHeight + 5 : deviceHeight),
             width: deviceWidth,
           },
+          (actualHeight)? [{ borderTopLeftRadius: 15,
+            borderTopRightRadius:15,shadowOffset: {
+              width: 0,
+              height: 6,
+            },
+            shadowOpacity: 0.39,
+            shadowRadius: 8.30,
+            
+            elevation: 13}]: null
         ]}
       >
         {closeOnTouchOutside && (
