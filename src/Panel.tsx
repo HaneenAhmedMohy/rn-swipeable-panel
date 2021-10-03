@@ -219,19 +219,10 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
         style={[
           SwipeablePanelStyles.background,
           {
-            backgroundColor: noBackgroundOpacity ? 'rgba(0,0,0,0.0)' : 'rgba(0,0,0,0.5)',
-            height: allowTouchOutside ? 'auto' : (actualHeight ? actualHeight + 5 : deviceHeight),
+            backgroundColor: noBackgroundOpacity ? 'transparent' : 'rgba(0,0,0,0.5)',
+            height: allowTouchOutside ? 'auto' : (actualHeight ? actualHeight: deviceHeight),
             width: deviceWidth,
-          },
-          (actualHeight)? [{ borderTopLeftRadius: 15,
-            borderTopRightRadius:15,shadowOffset: {
-              width: 0,
-              height: 6,
-            },
-            shadowOpacity: 0.39,
-            shadowRadius: 8.30,
-            
-            elevation: 13}]: null
+          }
         ]}
       >
         {closeOnTouchOutside && (
@@ -248,13 +239,11 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
             />
           </TouchableWithoutFeedback>
         )}
-        <Animated.View
+       
+       <Animated.View
           style={[
-            SwipeablePanelStyles.panel,
-            {
-              width: this.props.fullWidth ? deviceWidth : deviceWidth - 50,
-              height: panelHeight,
-            },
+            SwipeablePanelStyles.shadowStyle,
+
             { transform: this.state.pan.getTranslateTransform() },
             style,
           ]}
@@ -264,7 +253,15 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
           {this.props.showCloseButton && (
             <Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.props.onClose} />
           )}
+          <View style={   [SwipeablePanelStyles.panel,
+
+            {
+              width: this.props.fullWidth ? deviceWidth : deviceWidth - 50,
+              height: panelHeight,
+            }]}>
           {this.props.children}
+
+          </View>
           {/* <ScrollView
             onTouchStart={() => {
               return false;
@@ -299,27 +296,41 @@ const SwipeablePanelStyles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
   panel: {
-    position: 'absolute',
-    height: PANEL_HEIGHT,
-    width: FULL_WIDTH - 50,
-    transform: [{ translateY: FULL_HEIGHT - 100 }],
+  
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
+    overflow: 'hidden',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+
+   
+  },
+  shadowStyle:{
+    height: PANEL_HEIGHT,
+    width: FULL_WIDTH,
     bottom: 0,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
-    overflow: 'hidden',
-    shadowColor: '#000',
+    position: 'absolute',
+    backgroundColor:'white',
+  
+    transform: [{ translateY: FULL_HEIGHT - 100 }],
+
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 8,
     },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.0,
-    elevation: 1,
+    shadowOpacity: 0.46,
+    shadowRadius: 11.14,
+    
+    elevation: 13,
+
     zIndex: 2,
   },
   scrollViewContentContainerStyle: {
